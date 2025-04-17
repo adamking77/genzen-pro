@@ -1,4 +1,56 @@
-# Astro Starter Kit: Minimal
+# GenZen Pro
+
+A professional consulting company website built with Astro.js and Tailwind CSS.
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm (v9 or higher)
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/genzen-pro.git
+cd genzen-pro
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start the development server:
+```bash
+npm run dev
+```
+
+The site will be available at `http://localhost:4321`
+
+### Building for Production
+
+To create a production build:
+
+```bash
+npm run build
+```
+
+To preview the production build:
+
+```bash
+npm run preview
+```
+
+## 🛠️ Built With
+
+- [Astro](https://astro.build) - The web framework
+- [Tailwind CSS](https://tailwindcss.com) - The CSS framework
+
+## 📝 License
+
+This project is licensed under the MIT License.
 
 ```sh
 npm create astro@latest -- --template minimal

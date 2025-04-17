@@ -1,6 +1,76 @@
 # GenZen Pro
 
-A professional consulting company website built with Astro.js and Tailwind CSS.
+A modern business consulting website built with Astro.js and Tailwind CSS.
+
+## Project Structure
+
+```
+genzen-pro/
+├── src/
+│   ├── components/     # Reusable UI components
+│   ├── content/        # Content collections (pages, sections, globals)
+│   ├── layouts/        # Page layouts
+│   ├── pages/         # Astro pages
+│   └── styles/        # Global styles
+└── public/            # Static assets
+```
+
+## Content Management
+
+Content is managed through Astro Content Collections, located in `src/content/`:
+- `pages/`: Individual page content
+- `sections/`: Reusable content sections
+- `globals/`: Global site settings and navigation
+
+## Development
+
+1. Install dependencies:
+```bash
+npm install
+```
+
+2. Start development server:
+```bash
+npm run dev
+```
+
+3. Build for production:
+```bash
+npm run build
+```
+
+## Keeping the Repository Updated
+
+To keep this repository up to date, follow these steps after making changes:
+
+1. Stage your changes:
+```bash
+git add .
+```
+
+2. Commit your changes with a descriptive message:
+```bash
+git commit -m "Description of your changes"
+```
+
+3. Push to GitHub:
+```bash
+git push
+```
+
+### Best Practices for Updates
+
+1. Commit frequently with clear, descriptive messages
+2. Pull before making new changes:
+```bash
+git pull origin main
+```
+3. Keep content and code changes in separate commits
+4. Test your changes locally before pushing
+
+## License
+
+[MIT License](LICENSE)
 
 ## 🚀 Getting Started
 
@@ -48,9 +118,22 @@ npm run preview
 - [Astro](https://astro.build) - The web framework
 - [Tailwind CSS](https://tailwindcss.com) - The CSS framework
 
-## 📝 License
+## 🧞 Commands
 
-This project is licensed under the MIT License.
+All commands are run from the root of the project, from a terminal:
+
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
+
+## 👀 Want to learn more?
+
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
 
 ```sh
 npm create astro@latest -- --template minimal

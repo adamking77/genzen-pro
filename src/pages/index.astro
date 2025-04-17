@@ -5,12 +5,16 @@ import { getCollection } from 'astro:content';
 // Get the home page content
 const pages = await getCollection('pages');
 const homePage = pages.find((page: any) => page.id === 'home');
-const { Content } = await homePage.render();
+const { Content } = homePage ? await homePage.render() : { Content: null };
 
 // Get global site settings
 const globals = await getCollection('globals');
 const siteConfig = globals.find((item: any) => item.id === 'site');
-const { navigation, footer, site } = siteConfig.data;
+const { navigation, footer, site } = siteConfig?.data || { 
+  navigation: [], 
+  footer: { copyright: '', links: [] }, 
+  site: { title: 'GenZen Pro', description: '' } 
+};
 
 // Get sections
 const sections = await getCollection('sections');
@@ -19,39 +23,43 @@ const featuresSection = sections.find((section: any) => section.id === 'features
 
 <Layout title={site.title}>
   <!-- Hero Section -->
-  <section class="hero bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-20">
-    <div class="container mx-auto px-4">
-      <h1 class="text-4xl md:text-5xl font-bold mb-6">{homePage.data.hero.title}</h1>
-      <p class="text-xl mb-8">{homePage.data.hero.description}</p>
-      <a href={homePage.data.hero.ctaLink} class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
-        {homePage.data.hero.ctaText}
-      </a>
-    </div>
-  </section>
+  {homePage?.data.hero && (
+    <section class="hero bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-20">
+      <div class="container mx-auto px-4">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">{homePage.data.hero.title}</h1>
+        <p class="text-xl mb-8">{homePage.data.hero.description}</p>
+        <a href={homePage.data.hero.ctaLink} class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors">
+          {homePage.data.hero.ctaText}
+        </a>
+      </div>
+    </section>
+  )}
 
   <!-- Features Section -->
-  <section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-12">{featuresSection.data.content.heading}</h2>
-      <p class="text-xl text-center mb-12 max-w-3xl mx-auto">{featuresSection.data.content.description}</p>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {featuresSection.data.content.items.map((item: any) => (
-          <div class="bg-white p-6 rounded-lg shadow-md">
-            <div class="text-blue-600 mb-4">
-              <!-- Icon placeholder - you would replace this with actual icons -->
-              <span class="text-3xl">🔹</span>
+  {featuresSection?.data.content && (
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">{featuresSection.data.content.heading}</h2>
+        <p class="text-xl text-center mb-12 max-w-3xl mx-auto">{featuresSection.data.content.description}</p>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {featuresSection.data.content.items.map((item: any) => (
+            <div class="bg-white p-6 rounded-lg shadow-md">
+              <div class="text-blue-600 mb-4">
+                <!-- Icon placeholder - you would replace this with actual icons -->
+                <span class="text-3xl">🔹</span>
+              </div>
+              <h3 class="text-xl font-semibold mb-2">{item.title}</h3>
+              <p class="text-gray-600">{item.description}</p>
             </div>
-            <h3 class="text-xl font-semibold mb-2">{item.title}</h3>
-            <p class="text-gray-600">{item.description}</p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <!-- Main Content -->
   <div class="container mx-auto px-4 py-16">
-    <Content />
+    {Content && <Content />}
   </div>
 </Layout>

@@ -1,7 +1,6 @@
 ---
 title: Home
 description: Welcome to GenZen Pro - Innovative solutions for modern businesses
-layout: Layout
 sections:
   - hero
   - features

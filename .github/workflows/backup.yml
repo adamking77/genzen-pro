@@ -1,0 +1,44 @@
+name: Automated Backup
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 0 * * *'  # Run daily at midnight UTC
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Create backup branch
+        run: |
+          # Get current date for branch name
+          BACKUP_BRANCH="backup-$(date +'%Y-%m-%d')"
+          
+          # Create and switch to backup branch
+          git checkout -b $BACKUP_BRANCH
+          
+          # Push backup branch
+          git push origin $BACKUP_BRANCH
+
+      - name: Cleanup old backups
+        run: |
+          # Keep only last 7 backup branches
+          git fetch --all
+          BACKUP_BRANCHES=$(git branch -r | grep 'origin/backup-' | sort -r | tail -n +8)
+          for branch in $BACKUP_BRANCHES; do
+            branch_name=$(echo $branch | sed 's|origin/||')
+            git push origin --delete $branch_name
+          done 

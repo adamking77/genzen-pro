@@ -1,0 +1,31 @@
+---
+// Assets
+import Logo from "@/components/assets/Logo.astro";
+// Fundations
+import Link from "@/components/fundations/elements/Link.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+---
+
+<section class="bg-white overflow-hidden relative">
+  <Wrapper variant="standard" class="py-4">
+    <div class="grid grid-cols-3 items-center">
+      <a href="/" class="font-bold tracking-tighter text-accent-500 uppercase">
+        <Logo />
+      </a>
+      <div class="items-center gap-2 flex col-span-2">
+        <a href="/system/overview" class="hover:text-pink-500 ml-auto">
+          Overview
+        </a>
+        <div class="flex">
+          <Link
+            size="sm"
+            variant="accent"
+            href="https://buy.polar.sh/polar_cl_iuJMByyyUm-miB9rQmSMeIrqA29T1qQXw0abWbZORzM"
+          >
+            Buy outkast &nbsp; &rarr;
+          </Link>
+        </div>
+      </div>
+    </div>
+  </Wrapper>
+</section>

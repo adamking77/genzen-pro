@@ -1,0 +1,91 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: ['Inter', 'sans-serif'],
+        display: ['Epilogue', 'sans-serif'],
+      },
+      colors: {
+        base: {
+          50: '#f8f7f8',
+          100: '#f0eef0',
+          200: '#ded9de',
+          300: '#c1b8c1',
+          400: '#9e919f',
+          500: '#827483',
+          600: '#6a5e6b',
+          700: '#584c58',
+          800: '#4a424a',
+          900: '#423b42',
+          950: '#2b262b',
+        },
+        accent: {
+          50: '#f6f7f6',
+          100: '#e2e5e2',
+          200: '#c4cbc4',
+          300: '#9fa99f',
+          400: '#818d81',
+          500: '#606c61',
+          600: '#4b564b',
+          700: '#3f4640',
+          800: '#353a36',
+          900: '#2e332e',
+          950: '#181b18',
+        },
+        yellow: {
+          50: '#fbf6ef',
+          100: '#f3e4d2',
+          200: '#e6c7a1',
+          300: '#d8a771',
+          400: '#ce8a4b',
+          500: '#c5713b',
+          600: '#ae5631',
+          700: '#91402c',
+          800: '#773429',
+          900: '#632c24',
+          950: '#381410',
+        },
+        pink: {
+          50: '#fbf5f6',
+          100: '#f8ebed',
+          200: '#f2d9df',
+          300: '#e6bbc5',
+          400: '#d894a5',
+          500: '#c8728a',
+          600: '#af4f6e',
+          700: '#923e5b',
+          800: '#7b3650',
+          900: '#6a3148',
+          950: '#3a1725',
+        },
+      },
+      animation: {
+        marquee: 'marquee 12s linear infinite',
+        rightMarquee: 'rightMarquee 300s linear infinite',
+        slowMarquee: 'marquee 300s linear infinite',
+        verticalMarquee: 'vertical 30s linear infinite',
+      },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+        rightMarquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
+        vertical: {
+          '0%': { transform: 'translateY(0%)' },
+          '100%': { transform: 'translateY(-100%)' },
+        },
+      },
+    },
+  },
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
+    require('tailwind-scrollbar-hide'),
+  ],
+} 

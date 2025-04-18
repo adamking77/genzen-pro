@@ -1,31 +1,30 @@
 ---
 // Assets
-import Logo from "@/components/assets/Logo.astro";
+import { Image } from "astro:assets";
+import logoImage from "@/images/logo.png";
 // Fundations
+import Text from "@/components/fundations/elements/Text.astro";
 import Link from "@/components/fundations/elements/Link.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Section from "@/components/fundations/containers/Section.astro";
 ---
 
-<section class="bg-white overflow-hidden relative">
+<Section>
   <Wrapper variant="standard" class="py-4">
-    <div class="grid grid-cols-3 items-center">
-      <a href="/" class="font-bold tracking-tighter text-accent-500 uppercase">
-        <Logo />
-      </a>
-      <div class="items-center gap-2 flex col-span-2">
-        <a href="/system/overview" class="hover:text-pink-500 ml-auto">
-          Overview
+    <div class="flex items-center justify-between">
+      <div class="flex lg:flex-1">
+        <a href="/" class="-m-1.5 p-1.5 flex items-center gap-2">
+          <Image 
+            src={logoImage} 
+            alt="GenZen Pro Logo"
+            class="w-6 h-6"
+          />
+          <Text tag="span" variant="textLG" class="font-sans">GenZen Pro</Text>
         </a>
-        <div class="flex">
-          <Link
-            size="sm"
-            variant="accent"
-            href="https://buy.polar.sh/polar_cl_iuJMByyyUm-miB9rQmSMeIrqA29T1qQXw0abWbZORzM"
-          >
-            Buy outkast &nbsp; &rarr;
-          </Link>
-        </div>
+      </div>
+      <div class="flex gap-4">
+        <Link href="/system/overview" variant="muted" size="base">Overview</Link>
       </div>
     </div>
   </Wrapper>
-</section>
+</Section>

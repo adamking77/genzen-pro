@@ -5,6 +5,7 @@ import One from "@/images/1.png";
 // Fundations
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Section from "@/components/fundations/containers/Section.astro";
 // Marquee
 export const tags = [
   "web development",
@@ -16,7 +17,7 @@ export const tags = [
 const repeated = Array(20).fill(tags.join(" — ")).join(" — ");
 ---
 
-<section class="bg-white overflow-hidden relative">
+<Section>
   <Wrapper variant="standardWide" class="px-8 pb-0 py-12 lg:pt-24">
     <div class="grid items-end gap-4 lg:grid-cols-3 max-w-5xl mx-auto">
       <div class="lg:col-span-2">
@@ -48,4 +49,4 @@ const repeated = Array(20).fill(tags.join(" — ")).join(" — ");
       </div>
     </div>
   </Wrapper>
-</section>
+</Section>

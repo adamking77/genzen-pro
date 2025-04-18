@@ -6,24 +6,30 @@ import BaseHead from "@/components/fundations/head/BaseHead.astro";
 import Footer from "@/components/global/Footer.astro";
 import BlogSearch from "@/components/blog/BlogSearch.astro";
 import Navigation from "@/components/global/Navigation.astro";
+import Section from "@/components/fundations/containers/Section.astro";
+
+// Props
+const { class: className } = Astro.props;
 ---
 
 <html lang="en">
   <head>
     <BaseHead />
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>GenZen Pro</title>
   </head>
-  <body class="bg-accent-100 lg:p-10 lg:pb-0 mx-auto relative overflow-x-hidden">
-    <div class="flex flex-col min-h-dvh xl:max-w-[100rem] mx-auto ">
-      <Navigation />
+  <body class="bg-base-50">
+    <Navigation />
 
-      <BlogSearch class="fixed bottom-6 right-6 z-50" />
+    <BlogSearch class="fixed bottom-6 right-6 z-50" />
 
+    <main class={className}>
+      <slot />
+    </main>
 
-      <main class="grow">
-        <slot />
-      </main>
-
-      <Footer />
-    </div>
+    <Footer />
   </body>
 </html>

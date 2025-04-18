@@ -2,6 +2,7 @@
 // Fundations
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Section from "@/components/fundations/containers/Section.astro";
 // Components
 import Highlights from "@/components/services/Highlights.astro";
 // Content
@@ -9,7 +10,7 @@ import { getCollection } from "astro:content";
 const allServices = await getCollection("services");
 ---
 
-<section class="bg-white overflow-hidden relative">
+<Section>
   <Wrapper variant="standard" class="py-24">
     <div class="w-full max-w-xl">
       <div class="relative max-w-xs">
@@ -17,7 +18,7 @@ const allServices = await getCollection("services");
           <div class="w-full border-t border-accent-300"></div>
         </div>
         <div class="relative flex justify-start">
-          <span class="bg-white pr-2 text-sm text-accent-500 font-medium"
+          <span class="bg-[#f4f4f5] pr-2 text-sm text-accent-500 font-medium"
             >Services</span
           >
         </div>
@@ -51,4 +52,4 @@ const allServices = await getCollection("services");
       </a>
     </div>
   </Wrapper>
-</section>
+</Section>

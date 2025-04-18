@@ -4,6 +4,7 @@ import BigLogo from "@/components/assets/BigLogo.astro";
 // Fundations
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Section from "@/components/fundations/containers/Section.astro";
 const services = [
   { name: "License", link: "https://www.lexingtonthemes.com/legal/license" },
   { name: "Overview", link: "/system/overview" },
@@ -15,9 +16,53 @@ const services = [
   },
   { name: "Lexington On X", link: "https://twitter.com/lexingtonthemes" },
 ];
+// Content
+const navigation = {
+  social: [
+    {
+      name: "X",
+      href: "#",
+    },
+    {
+      name: "Instagram",
+      href: "#",
+    },
+    {
+      name: "GitHub",
+      href: "#",
+    },
+    {
+      name: "YouTube",
+      href: "#",
+    },
+  ],
+};
 ---
 
-<section class="bg-white overflow-hidden">
+<Section>
+  <Wrapper variant="standard" class="py-12">
+    <div class="flex flex-col items-center justify-between gap-4 sm:flex-row">
+      <Text tag="p" variant="textSM" class="text-accent-500">
+        &copy; 2024 Outkast. All rights reserved.
+      </Text>
+      <div class="flex gap-4">
+        {
+          navigation.social.map((item) => (
+            <a
+              href={item.href}
+              class="text-accent-500 hover:text-pink-500 duration-200"
+            >
+              <span class="sr-only">{item.name}</span>
+              {item.name}
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </Wrapper>
+</Section>
+
+<Section>
   <Wrapper variant="standard" class="py-24">
     <div class="max-w-sm">
       <Text
@@ -44,4 +89,4 @@ const services = [
     </div>
   </Wrapper>
   <BigLogo class="lg:-mr-52 lg:ml-110 lg:scale-150 text-accent-400" />
-</section>
+</Section>

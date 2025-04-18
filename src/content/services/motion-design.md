@@ -1,9 +1,6 @@
 ---
-title: Motion Design
-description: Bringing designs to life through animation and dynamic visual storytelling.
-pubDate: 2024-03-19
-category: Design
-tags: ["Motion", "Animation", "Design", "Visual"]
+service: Motion Design
+description: Design Systems provide a comprehensive framework of design principles, reusable components, and guidelines.
 ---
 
 

@@ -1,9 +1,6 @@
 ---
-title: Product Design
-description: Creating innovative and user-centered digital products that solve real problems.
-pubDate: 2024-03-19
-category: Design
-tags: ["Product", "Design", "Innovation", "UX"]
+service: Product Design
+description: Product Design is at the heart of creating functional, aesthetically pleasing products that meet the needs and desires of users. 
 ---
 
 

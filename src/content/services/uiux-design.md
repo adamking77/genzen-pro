@@ -1,9 +1,6 @@
 ---
-title: UI/UX Design
-description: Creating intuitive and engaging user experiences through thoughtful interface design.
-pubDate: 2024-03-19
-category: Design
-tags: ["UI", "UX", "Design", "Interface"]
+service: UI/UX  Design
+description: Strategizing and executing data-driven marketing campaigns is crucial for enhancing your online presence.
 ---
 
 

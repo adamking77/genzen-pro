@@ -1,6 +1,7 @@
 ---
 // Fundations
 import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 ---
 
@@ -36,14 +37,14 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
           receive a quote and a proposal.
         </Text>
       </div>
-      <a
-        title="link to your page"
-        aria-label="your label"
+      <Button
         href="/forms/contact"
-        class="flex size-32 text-sm md:text-base lg:text-2xl xl:text-3xl text-center md:size-32 shrink-0 lg:size-52 2xl:size-64 text-accent-500 hover:bg-accent-900 hover:text-white duration-300 items-center justify-center rounded-full bg-white"
+        variant="muted"
+        size="xl"
+        class="w-full md:w-48"
       >
         Contact us
-      </a>
+      </Button>
     </div>
   </Wrapper>
 </section>

@@ -1,6 +1,7 @@
 ---
 // Fundations
 import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 ---
 
@@ -30,16 +31,18 @@ import Wrapper from "@/components/fundations/containers/Wrapper.astro";
           variant="textXL"
           class="text-accent-100 mt-8 font-display text-balance"
         >
-          We’re a multi-disciplinary team building the future of the web. If
+          We're a multi-disciplinary team building the future of the web. If
           that sounds exciting to you, check out our open positions.
         </Text>
       </div>
-      <a
+      <Button
         href="#_"
-        class="flex size-32 text-sm md:text-base lg:text-2xl xl:text-3xl text-center md:size-32 shrink-0 lg:size-52 2xl:size-64 text-accent-500 hover:bg-accent-900 hover:text-white duration-300 items-center justify-center rounded-full bg-white"
+        variant="muted"
+        size="lg"
+        class="w-auto"
       >
         Careers
-      </a>
+      </Button>
     </div>
   </Wrapper>
 </section>

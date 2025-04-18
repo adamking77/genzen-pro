@@ -1,38 +1,27 @@
 ---
-// Assets
-import { Image } from "astro:assets";
 // Fundations
 import Text from "@/components/fundations/elements/Text.astro";
-const { url, company, work, thumbnail } = {
+const { url, company, work } = {
   url: "/work/" + Astro.props.post.slug,
   company: Astro.props.post.data.company,
   work: Astro.props.post.data.work,
-  thumbnail: Astro.props.post.data.thumbnail.url,
 };
 ---
 
-<article class="relative flex flex-col justify-between overflow-hidden group">
-  <a href={url} title={company} class="text-white absolute inset-0 z-10"></a>
-  <Image
-    src={thumbnail}
-    width="1000"
-    height="1000"
-    alt={company}
-    class="aspect-4/6 rounded-2xl object-cover object-top"
-  />
-
-  <div class="mt-4 text-center">
+<article class="relative flex flex-col justify-between overflow-hidden group bg-accent-50 rounded-2xl p-8 hover:bg-accent-100 transition-colors duration-300">
+  <a href={url} title={company} class="text-accent-800 absolute inset-0 z-10"></a>
+  <div class="text-left">
     <Text
       tag="h2"
-      variant="textLG"
-      class="text-accent-500 font-medium font-display"
+      variant="textXL"
+      class="text-accent-800 font-medium font-display mb-2"
     >
       {company}
     </Text>
     <Text
       tag="p"
       variant="textBase"
-      class="tracking-tight text-accent-500 text-balance"
+      class="tracking-tight text-accent-600"
     >
       {work}
     </Text>

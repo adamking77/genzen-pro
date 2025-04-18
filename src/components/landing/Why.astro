@@ -1,9 +1,8 @@
 ---
-// Assets
-import Shape1 from "@/components/assets/Shape3.astro";
 // Fundations
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+
 const reasons = [
   {
     term: "Expertise",
@@ -40,8 +39,6 @@ const reasons = [
 
 <section class="bg-accent-500 relative overflow-hidden">
   <Wrapper variant="standard" class="py-24">
-    <Shape1 class="absolute w-full h-full opacity-[0.2] z-0 invert -left-64 sm:-left-96 -bottom-72 rotate-45" />
-    
     <div class="px-8 py-24 mx-auto max-w-6xl md:px-16">
       <div class="flex flex-col max-w-xl lg:ml-auto">
         <div class="relative max-w-xs">
@@ -74,7 +71,7 @@ const reasons = [
         class="grid gap-12 lg:grid-cols-2 mt-24 lg:mt-48 lg:max-w-xl lg:ml-auto"
       >
         {
-          reasons.map((reason, index) => (
+          reasons.map((reason) => (
             <div>
               <dt class="font-display text-white text-2xl">{reason.term}</dt>
               <dd class="text-accent-100 text-base mt-4 text-pretty">

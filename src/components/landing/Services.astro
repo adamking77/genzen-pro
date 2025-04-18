@@ -1,6 +1,7 @@
 ---
 // Fundations
 import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
 import Section from "@/components/fundations/containers/Section.astro";
 // Components
@@ -43,13 +44,14 @@ const allServices = await getCollection("services");
       <ul role="list" class="flex flex-col gap-y-2 max-w-xl w-full">
         {allServices.map((post) => <Highlights service={post.data.service} />)}
       </ul>
-      <a
+      <Button
         href="/services/home"
-        class="flex flex-col size-32 text-sm md:text-base lg:text-2xl xl:text-3xl text-center md:size-32 shrink-0 lg:size-52 2xl:size-64 text-white hover:bg-base-900 hover:text-base-200 duration-300 items-center justify-center rounded-full bg-accent-600"
+        variant="accent"
+        size="lg"
+        class="w-auto"
       >
-        <span>Learn</span>
-        <span>more</span>
-      </a>
+        Learn more
+      </Button>
     </div>
   </Wrapper>
 </Section>

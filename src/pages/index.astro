@@ -1,23 +1,19 @@
 ---
 // Assets
 import { Image } from "astro:assets";
-import Shape1 from "@/components/assets/Shape3.astro";
+import Shape1 from "@/components/assets/Shape1.astro";
 // Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
 import Text from "@/components/fundations/elements/Text.astro";
 import Link from "@/components/fundations/elements/Link.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
-// Sections
-import BaseLayout from "@/layouts/BaseLayout.astro";
+// Components
 import Hero from "@/components/landing/Hero.astro";
-import LogoCloud1 from "@/components/testimonials/LogoCloud1.astro";
 import Services from "@/components/landing/Services.astro";
-import Awwards from "@/components/work/Awwards.astro";
 import Work from "@/components/landing/Work.astro";
 import Why from "@/components/landing/Why.astro";
 import Testimonials from "@/components/landing/Testimonials.astro";
 import CtaHire from "@/components/ctas/CtaHire.astro";
-// Components
-import BlogEntries2 from "@/components/blog/BlogEntries2.astro";
 // Content
 const allPosts = await getCollection("posts");
 import { getCollection } from "astro:content";
@@ -30,54 +26,9 @@ allPosts.sort((a, b) => {
 
 <BaseLayout>
   <Hero />
-  <LogoCloud1 />
   <Services />
-  <Awwards />
   <Work />
-
-    <Why />
+  <Why />
   <Testimonials />
   <CtaHire />
-  <section class="bg-white overflow-hidden relative">
-    <Shape1
-      class="absolute w-full h-full opacity-[0.2] z-0 -left-64 sm:-left-96 -bottom-72 rotate-45 text-accent-500"
-    />
-    <Wrapper variant="standard" class="py-24 relative">
-      <div class="w-full max-w-xl">
-        <div class="relative max-w-xs">
-          <div class="absolute inset-0 flex items-center" aria-hidden="true">
-            <div class="w-full border-t border-accent-300"></div>
-          </div>
-          <div class="relative flex justify-start">
-            <span class="bg-white pr-2 text-sm text-accent-500 font-medium"
-              >Latest articles</span
-            >
-          </div>
-        </div>
-        <Text
-          tag="h2"
-          variant="displayMD"
-          class="tracking-tighter font-display text-accent-800 text-balance mt-12"
-        >
-          From the blog
-        </Text>
-        <Text
-          tag="p"
-          variant="textXL"
-          class="text-accent-500 mt-8 text-balance"
-        >
-          Our latest articles are a testament to our expertise and dedication to
-          crafting unique and engaging content.
-        </Text>
-        <div class="flex mt-8">
-          <Link size="base" variant="muted" href="/blog/home">
-            Read all our articles
-          </Link>
-        </div>
-      </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-2 gap-x-12 gap-y-24 mt-24">
-        {allPosts.slice(0, 2).map((post) => <BlogEntries2 post={post} />)}
-      </div>
-    </Wrapper>
-  </section>
 </BaseLayout>

@@ -1,6 +1,58 @@
 import { defineCollection, z } from "astro:content";
- const team = defineCollection({
+
+const posts = defineCollection({
+  type: 'content',
   schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.date(),
+    updatedDate: z.date().optional(),
+    heroImage: z.string().optional(),
+    category: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    draft: z.boolean().optional(),
+  }),
+});
+
+const services = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.date(),
+    category: z.string(),
+    tags: z.array(z.string()),
+  }),
+});
+
+const work = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.date(),
+    category: z.string(),
+    tags: z.array(z.string()),
+    heroImage: z.string(),
+    link: z.string(),
+    company: z.string(),
+    year: z.string(),
+    client: z.string(),
+    credits: z.array(z.object({
+      name: z.string(),
+      role: z.string(),
+    })),
+  }),
+});
+
+const team = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    pubDate: z.date(),
+    category: z.string(),
+    tags: z.array(z.string()),
     name: z.string(),
     role: z.string(),
     intro: z.string(),
@@ -12,57 +64,25 @@ import { defineCollection, z } from "astro:content";
     }),
   }),
 });
-const work = defineCollection({
-  schema: z.object({
-    link: z.string().optional(),
-    company: z.string().optional(),
-    year: z.string().optional(),
-    client: z.string().optional(),
-    work: z.string(),
-    credits: z
-      .array(
-        z.object({
-          name: z.string(),
-          role: z.string(),
-        })
-      )
-      .optional(),
 
-    thumbnail: z.object({
-      url: z.string(),
-      alt: z.string(),
-    }),
-  }),
-});
-const services = defineCollection({
-  schema: z.object({
-    service: z.string(),
-    description: z.string(),
-  }),
-});
-const postsCollection = defineCollection({
-    schema: z.object({
-      title: z.string(),
-      pubDate: z.date(),
-      description: z.string(),
-      author: z.string(),
-      image: z.object({
-        url: z.string(),
-        alt: z.string()
-      }),
-      tags: z.array(z.string())
-    })
- });
 const infopages = defineCollection({
+  type: 'content',
   schema: z.object({
-    page: z.string(),
+    title: z.string(),
+    description: z.string(),
     pubDate: z.date(),
+    updatedDate: z.date().optional(),
+    heroImage: z.string().optional(),
+    category: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    draft: z.boolean().optional(),
   }),
 });
+
 export const collections = {
-  team: team,
-  work: work,
-  services: services,
-  infopages: infopages,
-  posts: postsCollection,
+  posts,
+  services,
+  work,
+  team,
+  infopages,
 };

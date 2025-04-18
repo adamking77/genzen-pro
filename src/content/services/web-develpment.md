@@ -1,6 +1,9 @@
 ---
-service: Web Development
-description: Web Development encompasses the coding and programming that enable website functionality, per the owner's requirements. 
+title: Web Development
+description: Building modern, performant, and scalable web applications with cutting-edge technologies.
+pubDate: 2024-03-19
+category: Development
+tags: ["Web", "Development", "Frontend", "Backend"]
 ---
 
 

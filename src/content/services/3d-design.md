@@ -1,8 +1,10 @@
 ---
-service: 3D Design
+title: 3D Design
 description: 3D Design involves the creation of digital environments, objects, and characters in three-dimensional space.
+pubDate: 2024-03-19
+category: Design
+tags: ["3D", "Design", "Modeling", "Animation"]
 ---
-
 
 ## Bringing Ideas to Life in Three Dimensions
 

@@ -11,19 +11,18 @@ import { formatDate } from "@/utils";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
-  post: CollectionEntry<"posts">;
+  frontmatter: CollectionEntry<"posts">["data"];
 }
 
-const { post } = Astro.props;
-const { Content } = await post.render();
-const author = await getEntry("team", post.data.author);
+const { frontmatter } = Astro.props;
+const author = await getEntry("team", frontmatter.author);
 ---
 
 <BaseLayout>
   <Section>
     <div class="prose prose-lg mx-auto">
       <div class="mb-8">
-        <h1 class="mb-2">{post.data.title}</h1>
+        <h1 class="mb-2">{frontmatter.title}</h1>
         <div class="flex items-center gap-4 text-sm text-gray-600">
           <div class="flex items-center gap-2">
             {author && (
@@ -39,14 +38,14 @@ const author = await getEntry("team", post.data.author);
               </>
             )}
           </div>
-          <time datetime={post.data.pubDate.toISOString()}>
-            {formatDate(post.data.pubDate)}
+          <time datetime={frontmatter.pubDate.toISOString()}>
+            {formatDate(frontmatter.pubDate)}
           </time>
         </div>
         {
-          post.data.tags && (
+          frontmatter.tags && (
             <div class="flex gap-2 mt-4">
-              {post.data.tags.map((tag) => (
+              {frontmatter.tags.map((tag) => (
                 <span class="px-2 py-1 bg-gray-100 rounded-full text-sm">
                   {tag}
                 </span>
@@ -55,7 +54,7 @@ const author = await getEntry("team", post.data.author);
           )
         }
       </div>
-      <Content />
+      <slot />
     </div>
   </Section>
 </BaseLayout>

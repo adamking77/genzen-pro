@@ -1,0 +1,101 @@
+---
+import '../styles/global.css';
+import { getCollection } from 'astro:content';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+
+// Get global site settings
+const globals = await getCollection('globals');
+const siteConfig = globals.find((item: any) => item.id === 'site');
+const { navigation, footer, site } = siteConfig?.data || { 
+  navigation: [], 
+  footer: { copyright: '', links: [] }, 
+  site: { title: 'GenZen Pro', description: '' } 
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} | {site.title}</title>
+    <meta name="description" content={site.description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <header class="bg-white shadow-sm">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <a href="/" class="text-2xl font-bold text-blue-600">{site.title}</a>
+          
+          <!-- Mobile menu button -->
+          <button 
+            id="mobile-menu-button" 
+            class="md:hidden text-gray-600 hover:text-gray-900 focus:outline-none"
+            aria-label="Toggle menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+          
+          <!-- Desktop navigation -->
+          <nav class="hidden md:flex space-x-8" aria-label="Main navigation">
+            {navigation.map((item: any) => (
+              <a href={item.url} class="text-gray-600 hover:text-blue-600 transition-colors">{item.label}</a>
+            ))}
+          </nav>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
+          <nav class="flex flex-col space-y-4" aria-label="Mobile navigation">
+            {navigation.map((item: any) => (
+              <a href={item.url} class="text-gray-600 hover:text-blue-600 transition-colors">{item.label}</a>
+            ))}
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-grow">
+      <slot />
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="mb-4 md:mb-0">
+            <p>{footer.copyright}</p>
+          </div>
+          <div class="flex space-x-4">
+            {footer.links?.map((link: any) => (
+              <a href={link.url} class="text-gray-300 hover:text-white transition-colors">{link.label}</a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile menu toggle
+      const mobileMenuButton = document.getElementById('mobile-menu-button');
+      const mobileMenu = document.getElementById('mobile-menu');
+      
+      if (mobileMenuButton && mobileMenu) {
+        mobileMenuButton.addEventListener('click', () => {
+          const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+          mobileMenuButton.setAttribute('aria-expanded', String(!isExpanded));
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
+    </script>
+  </body>
+</html> 

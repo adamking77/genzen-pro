@@ -1,7 +1,6 @@
-@import "tailwindcss";
-@plugin "@tailwindcss/forms";
-@plugin "@tailwindcss/typography";
-@plugin "tailwind-scrollbar-hide";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer utilities {
   .transition-max-w {
@@ -37,19 +36,19 @@
 
   /* Animation Utility Classes */
   .animate-marquee {
-    animation: var(--animate-marquee);
+    animation: marquee 12s linear infinite;
   }
 
   .animate-rightMarquee {
-    animation: var(--animate-rightMarquee);
+    animation: rightMarquee 300s linear infinite;
   }
 
   .animate-slowMarquee {
-    animation: var(--animate-slowMarquee);
+    animation: marquee 300s linear infinite;
   }
 
   .animate-verticalMarquee {
-    animation: var(--animate-verticalMarquee);
+    animation: vertical 30s linear infinite;
   }
 }
 @theme {

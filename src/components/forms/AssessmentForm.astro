@@ -1,0 +1,385 @@
+---
+// Assets
+import Shape3 from "@/components/assets/Shape3.astro";
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Section from "@/components/fundations/containers/Section.astro";
+
+type FormField = {
+  id: string;
+  label: string;
+  type: HTMLInputElement['type'] | 'select' | 'textarea';
+  required: boolean;
+  options?: string[];
+};
+
+const steps = [
+  {
+    title: "Basic Information",
+    fields: [
+      { id: "full_name", label: "Full Name", type: "text", required: true },
+      { id: "email", label: "Email Address", type: "email", required: true },
+      { id: "contact_method", label: "Preferred Contact Method", type: "select", required: true, options: ["Email", "Phone", "Encrypted Channel"] },
+      { id: "source", label: "How did you learn about GenZen Solutions?", type: "text", required: true }
+    ] as FormField[]
+  },
+  {
+    title: "Context Overview",
+    fields: [
+      { id: "situation", label: "Which best describes your current situation?", type: "radio", required: true, options: [
+        "High-stakes negotiation requiring strategic leverage",
+        "Communication challenges with sophisticated manipulation",
+        "Potential threat to reputation or legacy",
+        "Need for strategic protection in complex situation",
+        "Extraction from toxic relationship or arrangement",
+        "Other"
+      ]},
+      { id: "situation_other", label: "Please specify", type: "text", required: false, condition: "situation" },
+      { id: "pattern_recognition", label: "Please briefly describe the situation where you need strategic support. What makes this particularly challenging or complex?", type: "textarea", required: true },
+      { id: "previous_approaches", label: "What approaches have you already tried? Why do you believe they haven't been effective?", type: "textarea", required: true }
+    ]
+  },
+  {
+    title: "Urgency Assessment",
+    fields: [
+      { id: "timeline", label: "What is your timeline for resolution?", type: "radio", required: true, options: [
+        "Immediate (within days)",
+        "Short-term (within weeks)",
+        "Medium-term (within months)",
+        "Strategic (ongoing situation)"
+      ]},
+      { id: "transformation_indicators", label: "Which of these outcomes would create the most significant impact?", type: "checkbox", required: true, options: [
+        "Maintaining control in high-stakes communications",
+        "Seeing manipulation patterns before they take effect",
+        "Transforming vulnerabilities into strategic advantages",
+        "Designing effective exit strategies while protecting assets",
+        "Creating architectural control over critical situations",
+        "Restoring power in situations where it's being systematically stripped away"
+      ]},
+      { id: "value_assessment", label: "The investment for our Strategic Protection services begins at €10,000 per quarter. Is this within your expected investment range?", type: "radio", required: true, options: [
+        "Yes",
+        "No",
+        "Prefer to discuss"
+      ]},
+      { id: "additional_info", label: "Is there anything else you believe would be important for us to know before our conversation?", type: "textarea", required: false }
+    ]
+  }
+];
+---
+
+<section class="bg-white overflow-hidden relative">
+  <Wrapper variant="standard" class="pt-24 lg:pt-32 pb-12">
+    <div class="grid items-start grid-cols-1 gap-4 lg:grid-cols-3 mx-auto">
+      <div class="w-full bg-accent-500 p-10 lg:p-12 h-full rounded-2xl flex flex-col justify-between">
+        <Shape3 class="size-12 md:size-24 text-accent-200" />
+        <Text tag="h1" variant="displayMD" class="tracking-tighter font-display text-white mt-12">
+          Ready to work on the next big thing
+        </Text>
+      </div>
+      <form id="assessment-form" class="lg:col-span-2 bg-accent-50 p-10 lg:p-16 rounded-2xl space-y-8">
+        <!-- Progress Indicator -->
+        <div class="flex items-center justify-between mb-12">
+          {steps.map((_, index) => (
+            <div class="flex items-center">
+              <div
+                class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors bg-white border border-accent-100 text-accent-500"
+                data-step-indicator
+              >
+                {index + 1}
+              </div>
+              {index < steps.length - 1 && (
+                <div class="w-24 h-[1px] bg-accent-100 mx-2"></div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <!-- Step 1: Basic Information -->
+        <div class="grid grid-cols-1 gap-y-6" id="step-1">
+          {steps[0].fields.map((field) => (
+            <div>
+              <label for={field.id} class="block text-sm font-semibold leading-6 text-accent-500">
+                {field.label}
+              </label>
+              <div class="mt-2.5">
+                {field.type === "textarea" ? (
+                  <textarea
+                    id={field.id}
+                    name={field.id}
+                    rows="4"
+                    required={field.required}
+                    class="block w-full rounded-md border-0 px-3.5 py-2 text-accent-500 ring-1 ring-inset ring-accent-100 placeholder:text-accent-400 focus:ring-2 focus:ring-inset focus:ring-accent-300 sm:text-sm sm:leading-6"
+                  ></textarea>
+                ) : field.type === "select" ? (
+                  <select
+                    id={field.id}
+                    name={field.id}
+                    required={field.required}
+                    class="block w-full rounded-md border-0 px-3.5 py-2 text-accent-500 ring-1 ring-inset ring-accent-100 placeholder:text-accent-400 focus:ring-2 focus:ring-inset focus:ring-accent-300 sm:text-sm sm:leading-6"
+                  >
+                    <option value="">Select preferred contact method</option>
+                    {field.options?.map((option) => (
+                      <option value={option}>{option}</option>
+                    ))}
+                  </select>
+                ) : (
+                  <input
+                    type={field.type}
+                    id={field.id}
+                    name={field.id}
+                    required={field.required}
+                    class="block w-full rounded-md border-0 px-3.5 py-2 text-accent-500 ring-1 ring-inset ring-accent-100 placeholder:text-accent-400 focus:ring-2 focus:ring-inset focus:ring-accent-300 sm:text-sm sm:leading-6"
+                  />
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Step 2: Context Overview -->
+        <div class="hidden grid grid-cols-1 gap-y-6" id="step-2">
+          {steps[1].fields.map((field) => (
+            <div>
+              <label for={field.id} class="block text-sm font-semibold leading-6 text-accent-500">
+                {field.label}
+              </label>
+              <div class="mt-2.5">
+                {field.type === "textarea" ? (
+                  <textarea
+                    id={field.id}
+                    name={field.id}
+                    rows="4"
+                    required={field.required}
+                    class="block w-full rounded-md border-0 px-3.5 py-2 text-accent-500 ring-1 ring-inset ring-accent-100 placeholder:text-accent-400 focus:ring-2 focus:ring-inset focus:ring-accent-300 sm:text-sm sm:leading-6"
+                  ></textarea>
+                ) : field.type === "radio" ? (
+                  <div class="space-y-2">
+                    {field.options?.map((option) => (
+                      <div class="flex items-center">
+                        <input
+                          type="radio"
+                          id={`${field.id}_${option}`}
+                          name={field.id}
+                          value={option}
+                          required={field.required}
+                          class="h-4 w-4 border-accent-100 text-accent-500 focus:ring-accent-300"
+                        />
+                        <label for={`${field.id}_${option}`} class="ml-3 text-sm text-accent-500">
+                          {option}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <input
+                    type={field.type}
+                    id={field.id}
+                    name={field.id}
+                    required={field.required}
+                    class="block w-full rounded-md border-0 px-3.5 py-2 text-accent-500 ring-1 ring-inset ring-accent-100 placeholder:text-accent-400 focus:ring-2 focus:ring-inset focus:ring-accent-300 sm:text-sm sm:leading-6"
+                  />
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Step 3: Urgency Assessment -->
+        <div class="hidden grid grid-cols-1 gap-y-6" id="step-3">
+          {steps[2].fields.map((field) => (
+            <div>
+              <label for={field.id} class="block text-sm font-semibold leading-6 text-accent-500">
+                {field.label}
+              </label>
+              <div class="mt-2.5">
+                {field.type === "textarea" ? (
+                  <textarea
+                    id={field.id}
+                    name={field.id}
+                    rows="4"
+                    required={field.required}
+                    class="block w-full rounded-md border-0 px-3.5 py-2 text-accent-500 ring-1 ring-inset ring-accent-100 placeholder:text-accent-400 focus:ring-2 focus:ring-inset focus:ring-accent-300 sm:text-sm sm:leading-6"
+                  ></textarea>
+                ) : field.type === "radio" ? (
+                  <div class="space-y-2">
+                    {field.options?.map((option) => (
+                      <div class="flex items-center">
+                        <input
+                          type="radio"
+                          id={`${field.id}_${option}`}
+                          name={field.id}
+                          value={option}
+                          required={field.required}
+                          class="h-4 w-4 border-accent-100 text-accent-500 focus:ring-accent-300"
+                        />
+                        <label for={`${field.id}_${option}`} class="ml-3 text-sm text-accent-500">
+                          {option}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                ) : field.type === "checkbox" ? (
+                  <div class="space-y-2">
+                    {field.options?.map((option) => (
+                      <div class="flex items-center">
+                        <input
+                          type="checkbox"
+                          id={`${field.id}_${option}`}
+                          name={field.id}
+                          value={option}
+                          required={field.required}
+                          class="h-4 w-4 border-accent-100 text-accent-500 focus:ring-accent-300"
+                        />
+                        <label for={`${field.id}_${option}`} class="ml-3 text-sm text-accent-500">
+                          {option}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <input
+                    type={field.type}
+                    id={field.id}
+                    name={field.id}
+                    required={field.required}
+                    class="block w-full rounded-md border-0 px-3.5 py-2 text-accent-500 ring-1 ring-inset ring-accent-100 placeholder:text-accent-400 focus:ring-2 focus:ring-inset focus:ring-accent-300 sm:text-sm sm:leading-6"
+                  />
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-10 flex justify-between w-full">
+          <button
+            type="button"
+            class="hidden px-6 py-3 text-sm font-medium rounded-lg bg-accent-100 text-accent-500 hover:bg-accent-200 transition-colors"
+            id="prev-button"
+            data-prev
+          >
+            Previous
+          </button>
+          <button
+            type="button"
+            class="w-full px-6 py-3 text-sm font-medium rounded-lg bg-accent-500 text-white hover:bg-accent-600 transition-colors"
+            id="next-button"
+            data-next
+          >
+            Next
+          </button>
+          <button
+            type="submit"
+            class="hidden w-full px-6 py-3 text-sm font-medium rounded-lg bg-accent-500 text-white hover:bg-accent-600 transition-colors"
+            id="submit-button"
+            data-submit
+          >
+            Submit Assessment
+          </button>
+        </div>
+      </form>
+    </div>
+  </Wrapper>
+</section>
+
+<script>
+  class AssessmentFormController {
+    private currentStep: number;
+    private totalSteps: number;
+    private form: HTMLFormElement | null;
+    private prevButton: HTMLButtonElement | null;
+    private nextButton: HTMLButtonElement | null;
+    private submitButton: HTMLButtonElement | null;
+    private stepIndicators: NodeListOf<Element>;
+
+    constructor() {
+      this.currentStep = 1;
+      this.totalSteps = 3;
+      this.form = document.getElementById('assessment-form') as HTMLFormElement;
+      this.prevButton = document.querySelector('[data-prev]') as HTMLButtonElement;
+      this.nextButton = document.querySelector('[data-next]') as HTMLButtonElement;
+      this.submitButton = document.querySelector('[data-submit]') as HTMLButtonElement;
+      this.stepIndicators = document.querySelectorAll('[data-step-indicator]');
+      
+      this.initialize();
+    }
+
+    initialize() {
+      this.showStep(1);
+      this.setupEventListeners();
+    }
+
+    setupEventListeners() {
+      this.prevButton?.addEventListener('click', () => this.prevStep());
+      this.nextButton?.addEventListener('click', () => this.nextStep());
+      this.form?.addEventListener('submit', (e) => this.handleSubmit(e));
+    }
+
+    showStep(step) {
+      // Hide all steps
+      for (let i = 1; i <= this.totalSteps; i++) {
+        const stepElement = document.getElementById(`step-${i}`);
+        if (stepElement) {
+          stepElement.classList.add('hidden');
+        }
+      }
+      
+      // Show current step
+      const currentStepElement = document.getElementById(`step-${step}`);
+      if (currentStepElement) {
+        currentStepElement.classList.remove('hidden');
+      }
+      
+      // Update step indicators
+      this.stepIndicators.forEach((indicator, index) => {
+        if (index + 1 === step) {
+          indicator.classList.remove('bg-gray-200');
+          indicator.classList.add('bg-white', 'border-[#2c4863]', 'text-[#2c4863]');
+        } else if (index + 1 < step) {
+          indicator.classList.remove('bg-gray-200', 'bg-white', 'text-[#2c4863]');
+          indicator.classList.add('bg-[#2c4863]', 'text-white', 'border-[#2c4863]');
+        } else {
+          indicator.classList.remove('bg-white', 'text-[#2c4863]', 'bg-[#2c4863]');
+          indicator.classList.add('bg-gray-200', 'text-gray-700');
+        }
+      });
+      
+      // Update buttons
+      if (this.prevButton) {
+        this.prevButton.classList.toggle('hidden', step === 1);
+      }
+      if (this.nextButton) {
+        this.nextButton.classList.toggle('hidden', step === this.totalSteps);
+      }
+      if (this.submitButton) {
+        this.submitButton.classList.toggle('hidden', step !== this.totalSteps);
+      }
+    }
+
+    nextStep() {
+      if (this.currentStep < this.totalSteps) {
+        this.currentStep++;
+        this.showStep(this.currentStep);
+      }
+    }
+
+    prevStep() {
+      if (this.currentStep > 1) {
+        this.currentStep--;
+        this.showStep(this.currentStep);
+      }
+    }
+
+    handleSubmit(e) {
+      e.preventDefault();
+      // Add your form submission logic here
+      console.log('Form submitted');
+    }
+  }
+
+  // Initialize the form controller when the DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    new AssessmentFormController();
+  });
+</script> 

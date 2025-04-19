@@ -37,21 +37,16 @@ const allServices = await getCollection("services");
         in the realm of creativity. We have acquired a range of skills, which we
         continuously hone.
       </Text>
-    </div>
-    <div
-      class="flex flex-col flex-shrink-0 gap-8 md:flex-row md:gap-12 mt-12 md:items-center"
-    >
-      <ul role="list" class="flex flex-col gap-y-2 max-w-xl w-full">
-        {allServices.map((post) => <Highlights service={post.data.service} />)}
-      </ul>
-      <Button
-        href="/services/home"
-        variant="accent"
-        size="lg"
-        class="w-auto"
-      >
-        Learn more
-      </Button>
+      <div class="mt-12">
+        <Button
+          href="/services/home"
+          variant="accent"
+          size="lg"
+          class="w-auto"
+        >
+          Learn more
+        </Button>
+      </div>
     </div>
   </Wrapper>
 </Section>

@@ -58,11 +58,11 @@ const caseStudies = [
 <BaseLayout>
   <!-- Hero Section -->
   <section class="bg-base-50 overflow-hidden relative">
-    <div class="w-full max-w-[1920px] mx-auto py-12 lg:pt-24 lg:pb-40 px-4 sm:px-6 lg:px-8">
+    <Wrapper variant="standard" class="py-12 lg:pt-24 lg:pb-40">
       <div class="grid lg:grid-cols-12 gap-16 lg:gap-24">
-        <div class="lg:col-span-5 w-full pl-4">
+        <div class="lg:col-span-5 w-full">
           <div
-            class="w-full bg-accent-500 p-10 lg:p-12 h-full rounded-2xl flex flex-col justify-between"
+            class="w-full bg-accent-500 p-10 lg:p-12 h-full rounded-2xl flex flex-col justify-between max-w-2xl mx-auto lg:mx-0"
           >
             <Logo class="size-12 md:size-24 text-accent-200" />
             <div class="mt-8">
@@ -83,7 +83,7 @@ const caseStudies = [
             </div>
           </div>
         </div>
-        <div class="lg:col-span-7 w-full">
+        <div class="lg:col-span-7 w-full max-w-2xl lg:max-w-none mx-auto">
           <div class="relative max-w-xs">
             <div class="absolute inset-0 flex items-center" aria-hidden="true">
               <div class="w-full border-t border-accent-300"></div>
@@ -117,7 +117,7 @@ const caseStudies = [
           </Text>
         </div>
       </div>
-    </div>
+    </Wrapper>
   </section>
 
   <!-- Next Steps Section -->

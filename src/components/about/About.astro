@@ -1,9 +1,9 @@
 ---
 // Assets
 import { Image } from "astro:assets";
-import AboutImage from "@/images/about.jpeg";
 import AboutImage2 from "@/images/avatar2.jpeg";
-import Shape3 from "@/components/assets/Shape3.astro";
+import Avatar1 from "@/images/avatar1.jpeg";
+import AdamHeadshot from "@/images/adam-headshot.jpeg";
 // Fundations
 import Text from "@/components/fundations/elements/Text.astro";
 import Link from "@/components/fundations/elements/Link.astro";
@@ -82,49 +82,7 @@ const stats = [
 ];
 ---
 
-<section class="bg-white overflow-hidden relative">
-  <Wrapper variant="standard" class="pt-24 lg:pt-32 pb-12">
-    <div class="grid items-end grid-cols-1 gap-4 lg:grid-cols-3">
-      <div
-        class="w-full bg-accent-500 p-10 lg:p-12 h-full rounded-2xl flex flex-col justify-end"
-      >
-        <Text
-          tag="h1"
-          variant="displayMD"
-          class="tracking-tighter font-display text-white"
-        >
-          Who we are and what we offer
-        </Text>
-      </div>
-      <Image
-        width={800}
-        height={800}
-        src={AboutImage}
-        alt="#_"
-        class="aspect-[4/4] object-cover object-center rounded-2xl max-h-96 lg:col-span-2 w-full"
-      />
-    </div>
-    <div class="flex flex-col gap-4 mt-12">
-      {
-        stats.map((stat) => (
-          <div class="flex md:items-center md:flex-row flex-col gap-4  justify-between">
-            <Text tag="p" variant="textXL" class={`font-medium ${stat.color}`}>
-              {stat.display}
-            </Text>
-            <Text
-              tag="p"
-              variant="displaySM"
-              class="text-accent-500 font-medium"
-            >
-              {stat.label}
-            </Text>
-          </div>
-        ))
-      }
-    </div>
-  </Wrapper>
-</section>
-<section class="bg-white overflow-hidden relative">
+<section class="bg-base-50 overflow-hidden relative">
   <Wrapper variant="standard" class="py-24">
     <div class="max-w-xl">
       <div class="relative max-w-xs">
@@ -132,8 +90,8 @@ const stats = [
           <div class="w-full border-t border-accent-300"></div>
         </div>
         <div class="relative flex justify-start">
-          <span class="bg-white pr-2 text-sm text-accent-500 font-medium"
-            >About us</span
+          <span class="bg-base-50 pr-2 text-sm text-accent-500 font-medium"
+            >About GenZen</span
           >
         </div>
       </div>
@@ -144,40 +102,100 @@ const stats = [
       >
         This is who we really are as an agency.
       </Text>
-      <Text tag="p" variant="textXL" class="text-accent-500 mt-8 text-balance">
+      <Text tag="p" variant="textBase" class="text-accent-500 mt-8 text-balance">
         Your new partners in design crime, except without the masks and capes.
-        We’re the cool cats behind digital design and brand wizardry, spreading
+        We're the cool cats behind digital design and brand wizardry, spreading
         our magic across the world.
         <br />
         <br />
-        Why Outkast, you ask? Well, we couldn’t resist the call of the design universe.
-        We’re not your average office crowd – more like a bunch of design rebels
-        on the loose. We’ve got this awesome network of talented folks and studios
+        Why Outkast, you ask? Well, we couldn't resist the call of the design universe.
+        We're not your average office crowd – more like a bunch of design rebels
+        on the loose. We've got this awesome network of talented folks and studios
         we team up with whenever we need to rock the design stage.
         <br />
         <br />
         Think of us as the ultimate design dream team, minus the spandex. From crafting
-        brand vibes to sprinkling digital fairy dust, we’re the jack-of-all-trades.
+        brand vibes to sprinkling digital fairy dust, we're the jack-of-all-trades.
         We handle everything from nifty industrial designs to vintage print charm
         to apps that are so slick, they might just steal your heart.
         <br />
         <br />
-        But here’s the kicker – we’re not about quick fixes. We’re all about creating
-        designs that stand the test of time, not just one-hit wonders. So if you’re
+        But here's the kicker – we're not about quick fixes. We're all about creating
+        designs that stand the test of time, not just one-hit wonders. So if you're
         ready to dive into a world of design awesomeness, give us a shout!
       </Text>
     </div>
   </Wrapper>
 </section>
-<section class="bg-white overflow-hidden relative">
-  <Wrapper variant="standard" class="py-12">
+<section class="bg-base-50 overflow-hidden relative">
+  <Wrapper variant="standard" class="py-24">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      <div class="max-w-2xl">
+        <div class="relative max-w-xs">
+          <div class="absolute inset-0 flex items-center" aria-hidden="true">
+            <div class="w-full border-t border-accent-300"></div>
+          </div>
+          <div class="relative flex justify-start">
+            <span class="bg-base-50 pr-2 text-sm text-accent-500 font-medium"
+              >About Adam</span
+            >
+          </div>
+        </div>
+        <Text
+          tag="h2"
+          variant="display2XL"
+          class="tracking-tight font-display text-accent-800 mt-12 text-balance"
+        >
+          We're all about the fun.
+        </Text>
+        <dl class="flex flex-col gap-12 mt-12">
+          {
+            culture.map((item) => (
+              <div>
+                <dt>
+                  <Text
+                    tag="h3"
+                    variant="textXL"
+                    class="font-display text-accent-900"
+                  >
+                    {item.term}
+                  </Text>
+                </dt>
+                <dd>
+                  <Text
+                    tag="p"
+                    variant="textBase"
+                    class="text-accent-500 mt-4 text-pretty"
+                  >
+                    {item.description}
+                  </Text>
+                </dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+      <div class="relative lg:mt-24">
+        <Image
+          src={AdamHeadshot}
+          alt="Adam King - Founder"
+          width={480}
+          height={600}
+          class="rounded-2xl object-cover aspect-[4/5] w-full"
+        />
+      </div>
+    </div>
+  </Wrapper>
+</section>
+<section class="bg-base-50 overflow-hidden relative">
+  <Wrapper variant="standard" class="py-24">
     <div class="w-full max-w-xl">
       <div class="relative max-w-xs">
         <div class="absolute inset-0 flex items-center" aria-hidden="true">
           <div class="w-full border-t border-accent-300"></div>
         </div>
         <div class="relative flex justify-start">
-          <span class="bg-white pr-2 text-sm text-accent-500 font-medium"
+          <span class="bg-base-50 pr-2 text-sm text-accent-500 font-medium"
             >Operations</span
           >
         </div>
@@ -216,114 +234,6 @@ const stats = [
           ))
         }
       </dl>
-    </div>
-  </Wrapper>
-</section>
-<section class="overflow-hidden relative bg-white">
-  <Wrapper variant="standard" class="py-24">
-    <Shape3
-      class="absolute w-full h-full opacity-[0.2] top-50 z-0 -left-64 sm:-left-96"
-    />
-
-    <div class="lg:grid-cols-3 grid gap-12 lg:gap-24">
-      <div class="lg:col-span-2">
-        <div class="relative max-w-xs">
-          <div class="absolute inset-0 flex items-center" aria-hidden="true">
-            <div class="w-full border-t border-accent-300"></div>
-          </div>
-          <div class="relative flex justify-start">
-            <span class="bg-white pr-2 text-sm text-accent-500 font-medium"
-              >Culture</span
-            >
-          </div>
-        </div>
-        <Text
-          tag="h2"
-          variant="display2XL"
-          class="tracking-tight font-display text-accent-800 mt-12 text-balance"
-        >
-          We're all about the fun.
-        </Text>
-      </div>
-      <dl class="flex flex-col gap-12">
-        {
-          culture.map((item) => (
-            <div>
-              <dt>
-                <Text
-                  tag="h3"
-                  variant="textXL"
-                  class="font-display text-accent-900"
-                >
-                  {item.term}
-                </Text>
-              </dt>
-              <dd>
-                <Text
-                  tag="p"
-                  variant="textBase"
-                  class="text-accent-500 mt-4 text-pretty"
-                >
-                  {item.description}
-                </Text>
-              </dd>
-            </div>
-          ))
-        }
-      </dl>
-    </div>
-  </Wrapper>
-</section>
-<section class="overflow-hidden relative bg-white">
-  <Wrapper variant="standard" class="py-24">
-    <div class="grid items-end gap-4 lg:grid-cols-2">
-      <div class="">
-        <div class="relative max-w-xs">
-          <div class="absolute inset-0 flex items-center" aria-hidden="true">
-            <div class="w-full border-t border-accent-300"></div>
-          </div>
-          <div class="relative flex justify-start">
-            <span class="bg-white pr-2 text-sm text-accent-500 font-medium"
-              >The team</span
-            >
-          </div>
-        </div>
-        <Text
-          tag="h2"
-          variant="displayLG"
-          class="tracking-tight font-display text-accent-800 mt-12 text-balance"
-        >
-          Get to know our team
-        </Text>
-      </div>
-      <div class="flex mt-8 ml-auto">
-        <Link size="base" variant="accent" href="/team/home">
-          Get to know us
-        </Link>
-      </div>
-    </div>
-
-    <Image
-      width={1280}
-      height={720}
-      class="aspect-[4/4] object-cover object-center rounded-2xl max-h-120 mt-8"
-      src={AboutImage2}
-      alt="your alt"
-    />
-    <div
-      class="py-12 grid grid-cols-1 gap-0.5 text-center sm:grid-cols-2 lg:grid-cols-4"
-    >
-      {
-        social.map((item) => (
-          <a
-            href={item.link}
-            title={item.platform}
-            class="text-3xl font-semibold tracking-tight text-accent-900"
-          >
-            {item.platform}
-          </a>
-        ))
-      }
     </div>
   </Wrapper>
 </section>

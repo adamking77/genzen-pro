@@ -1,0 +1,235 @@
+---
+// Assets
+import Logo from "@/components/assets/Logo.astro";
+// Fundations
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Text from "@/components/fundations/elements/Text.astro";
+import Button from "@/components/fundations/elements/Button.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+import Section from "@/components/fundations/containers/Section.astro";
+
+const caseStudies = [
+  {
+    title: "Strategic Communication Transformation",
+    description: "How a client turned communication challenges into opportunities for growth.",
+    link: "#"
+  },
+  {
+    title: "Reputation Management Success",
+    description: "A case study in protecting and enhancing professional legacy.",
+    link: "#"
+  }
+];
+---
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+  }
+
+  .float-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .delay-1 {
+    animation-delay: 0.2s;
+  }
+
+  .delay-2 {
+    animation-delay: 0.4s;
+  }
+
+  .delay-3 {
+    animation-delay: 0.6s;
+  }
+</style>
+
+<BaseLayout>
+  <!-- Hero Section -->
+  <section class="bg-base-50 overflow-hidden relative">
+    <div class="w-full max-w-[1920px] mx-auto py-12 lg:pt-24 px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-16 lg:gap-24">
+        <div class="lg:col-span-5 w-full">
+          <div
+            class="w-full bg-accent-500 p-10 lg:p-12 h-full rounded-2xl flex flex-col justify-between"
+          >
+            <Logo class="size-12 md:size-24 text-accent-200" />
+            <div class="mt-8">
+              <Text
+                tag="h1"
+                variant="displayMD"
+                class="tracking-tighter font-display text-white"
+              >
+                Thank you for reaching out
+              </Text>
+              <Text
+                tag="p"
+                variant="textXL"
+                class="text-accent-100 mt-6 fade-in delay-1"
+              >
+                We've received your assessment and will review it carefully.
+              </Text>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-7 w-full">
+          <div class="relative max-w-xs">
+            <div class="absolute inset-0 flex items-center" aria-hidden="true">
+              <div class="w-full border-t border-accent-300"></div>
+            </div>
+            <div class="relative flex justify-start">
+              <span class="bg-base-50 pr-2 text-sm text-accent-500 font-medium">Next Steps</span>
+            </div>
+          </div>
+          <Text
+            tag="h2"
+            variant="displayLG"
+            class="tracking-tight font-display text-accent-800 mt-12 text-balance"
+          >
+            Your journey to strategic success begins here
+          </Text>
+          <Text
+            tag="p"
+            variant="textXL"
+            class="text-accent-500 mt-8 text-balance"
+          >
+            Our team of experts is already preparing to analyze your situation and develop 
+            a tailored strategy that addresses your unique challenges and objectives.
+          </Text>
+          <Text
+            tag="p"
+            variant="textBase"
+            class="text-accent-500 mt-6 text-balance"
+          >
+            Within the next 24-48 hours, you'll receive a comprehensive initial assessment 
+            that outlines our preliminary findings and recommendations for moving forward.
+          </Text>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Next Steps Section -->
+  <section class="bg-accent-500 overflow-hidden relative">
+    <Wrapper variant="standard" class="py-24">
+      <div class="grid lg:grid-cols-2 gap-16">
+        <div>
+          <div class="relative max-w-xs">
+            <div class="absolute inset-0 flex items-center" aria-hidden="true">
+              <div class="w-full border-t border-accent-300"></div>
+            </div>
+            <div class="relative flex justify-start">
+              <span class="bg-accent-500 pr-2 text-sm text-white font-medium">Next Steps</span>
+            </div>
+          </div>
+          <Text
+            tag="h2"
+            variant="displayLG"
+            class="tracking-tight font-display text-white mt-12"
+          >
+            What happens now?
+          </Text>
+          <Text
+            tag="p"
+            variant="textXL"
+            class="text-accent-100 mt-8"
+          >
+            Our team will analyze your situation and prepare a tailored response within 24-48 hours.
+          </Text>
+          <div class="mt-12">
+            <Button
+              href="#"
+              variant="muted"
+              size="lg"
+              class="w-auto"
+            >
+              Download Initial Report
+            </Button>
+          </div>
+        </div>
+        <div class="space-y-8">
+          <div class="bg-accent-400/10 p-8 rounded-2xl">
+            <Text tag="h3" variant="textXL" class="font-display text-white">
+              1. Initial Review
+            </Text>
+            <Text tag="p" variant="textBase" class="text-accent-100 mt-4">
+              Our experts will carefully analyze your situation and identify key areas for strategic intervention.
+            </Text>
+          </div>
+          <div class="bg-accent-400/10 p-8 rounded-2xl">
+            <Text tag="h3" variant="textXL" class="font-display text-white">
+              2. Strategy Development
+            </Text>
+            <Text tag="p" variant="textBase" class="text-accent-100 mt-4">
+              We'll develop a customized approach based on your specific circumstances and objectives.
+            </Text>
+          </div>
+          <div class="bg-accent-400/10 p-8 rounded-2xl">
+            <Text tag="h3" variant="textXL" class="font-display text-white">
+              3. Consultation Scheduling
+            </Text>
+            <Text tag="p" variant="textBase" class="text-accent-100 mt-4">
+              Our team will reach out to schedule an in-depth consultation to discuss our recommendations.
+            </Text>
+          </div>
+        </div>
+      </div>
+    </Wrapper>
+  </section>
+
+  <!-- Case Studies Section -->
+  <Section>
+    <Wrapper variant="standard" class="py-24">
+      <div class="max-w-xl">
+        <div class="relative max-w-xs">
+          <div class="absolute inset-0 flex items-center" aria-hidden="true">
+            <div class="w-full border-t border-accent-300"></div>
+          </div>
+          <div class="relative flex justify-start">
+            <span class="bg-base-50 pr-2 text-sm text-accent-500 font-medium">Related Cases</span>
+          </div>
+        </div>
+        <Text
+          tag="h2"
+          variant="displayMD"
+          class="tracking-tight font-display text-accent-800 mt-12"
+        >
+          Similar situations we've handled
+        </Text>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8 mt-12">
+        {caseStudies.map((study) => (
+          <a href={study.link} class="group">
+            <article class="bg-accent-50 p-8 rounded-2xl hover:bg-accent-100 transition-colors duration-300">
+              <Text
+                tag="h3"
+                variant="textXL"
+                class="font-display text-accent-800"
+              >
+                {study.title}
+              </Text>
+              <Text
+                tag="p"
+                variant="textBase"
+                class="text-accent-500 mt-4"
+              >
+                {study.description}
+              </Text>
+            </article>
+          </a>
+        ))}
+      </div>
+    </Wrapper>
+  </Section>
+</BaseLayout> 

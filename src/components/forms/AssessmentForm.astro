@@ -1,6 +1,6 @@
 ---
 // Assets
-import Shape3 from "@/components/assets/Shape3.astro";
+import Logo from "@/components/assets/Logo.astro";
 // Fundations
 import Text from "@/components/fundations/elements/Text.astro";
 import Button from "@/components/fundations/elements/Button.astro";
@@ -10,9 +10,14 @@ import Section from "@/components/fundations/containers/Section.astro";
 type FormField = {
   id: string;
   label: string;
-  type: HTMLInputElement['type'] | 'select' | 'textarea';
+  type: 'text' | 'email' | 'tel' | 'radio' | 'checkbox' | 'select' | 'textarea';
   required: boolean;
   options?: string[];
+  hidden?: boolean;
+  condition?: {
+    field: string;
+    value: string;
+  };
 };
 
 const steps = [
@@ -21,7 +26,6 @@ const steps = [
     fields: [
       { id: "full_name", label: "Full Name", type: "text", required: true },
       { id: "email", label: "Email Address", type: "email", required: true },
-      { id: "contact_method", label: "Preferred Contact Method", type: "select", required: true, options: ["Email", "Phone", "Encrypted Channel"] },
       { id: "source", label: "How did you learn about GenZen Solutions?", type: "text", required: true }
     ] as FormField[]
   },
@@ -36,7 +40,10 @@ const steps = [
         "Extraction from toxic relationship or arrangement",
         "Other"
       ]},
-      { id: "situation_other", label: "Please specify", type: "text", required: false, condition: "situation" },
+      { id: "situation_other", label: "Please specify", type: "text", required: false, hidden: true, condition: {
+        field: "situation",
+        value: "Other"
+      }},
       { id: "pattern_recognition", label: "Please briefly describe the situation where you need strategic support. What makes this particularly challenging or complex?", type: "textarea", required: true },
       { id: "previous_approaches", label: "What approaches have you already tried? Why do you believe they haven't been effective?", type: "textarea", required: true }
     ]
@@ -73,7 +80,7 @@ const steps = [
   <Wrapper variant="standard" class="pt-24 lg:pt-32 pb-12">
     <div class="grid items-start grid-cols-1 gap-4 lg:grid-cols-3 mx-auto">
       <div class="w-full bg-accent-500 p-10 lg:p-12 h-full rounded-2xl flex flex-col justify-between">
-        <Shape3 class="size-12 md:size-24 text-accent-200" />
+        <Logo class="size-12 md:size-24 text-accent-200" />
         <Text tag="h1" variant="displayMD" class="tracking-tighter font-display text-white mt-12">
           Ready to work on the next big thing
         </Text>
@@ -84,13 +91,13 @@ const steps = [
           {steps.map((_, index) => (
             <div class="flex items-center">
               <div
-                class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors bg-white border border-accent-100 text-accent-500"
+                class="w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors border"
                 data-step-indicator
               >
                 {index + 1}
               </div>
               {index < steps.length - 1 && (
-                <div class="w-24 h-[1px] bg-accent-100 mx-2"></div>
+                <div class="w-24 h-[1px] mx-2" data-step-line></div>
               )}
             </div>
           ))}
@@ -141,7 +148,7 @@ const steps = [
         <!-- Step 2: Context Overview -->
         <div class="hidden grid grid-cols-1 gap-y-6" id="step-2">
           {steps[1].fields.map((field) => (
-            <div>
+            <div class={field.hidden ? 'hidden' : ''} data-field={field.id}>
               <label for={field.id} class="block text-sm font-semibold leading-6 text-accent-500">
                 {field.label}
               </label>
@@ -252,10 +259,10 @@ const steps = [
           ))}
         </div>
 
-        <div class="mt-10 flex justify-between w-full">
+        <div class="mt-10 flex justify-between gap-4 w-full">
           <button
             type="button"
-            class="hidden px-6 py-3 text-sm font-medium rounded-lg bg-accent-100 text-accent-500 hover:bg-accent-200 transition-colors"
+            class="hidden flex-1 px-6 py-3 text-sm font-medium rounded-lg bg-accent-100 text-accent-500 hover:bg-accent-200 transition-colors"
             id="prev-button"
             data-prev
           >
@@ -263,7 +270,7 @@ const steps = [
           </button>
           <button
             type="button"
-            class="w-full px-6 py-3 text-sm font-medium rounded-lg bg-accent-500 text-white hover:bg-accent-600 transition-colors"
+            class="flex-1 px-6 py-3 text-sm font-medium rounded-lg bg-accent-500 text-white hover:bg-accent-600 transition-colors"
             id="next-button"
             data-next
           >
@@ -271,7 +278,7 @@ const steps = [
           </button>
           <button
             type="submit"
-            class="hidden w-full px-6 py-3 text-sm font-medium rounded-lg bg-accent-500 text-white hover:bg-accent-600 transition-colors"
+            class="hidden flex-1 px-6 py-3 text-sm font-medium rounded-lg bg-accent-500 text-white hover:bg-accent-600 transition-colors"
             id="submit-button"
             data-submit
           >
@@ -292,6 +299,7 @@ const steps = [
     private nextButton: HTMLButtonElement | null;
     private submitButton: HTMLButtonElement | null;
     private stepIndicators: NodeListOf<Element>;
+    private stepLines: NodeListOf<Element>;
 
     constructor() {
       this.currentStep = 1;
@@ -301,6 +309,7 @@ const steps = [
       this.nextButton = document.querySelector('[data-next]') as HTMLButtonElement;
       this.submitButton = document.querySelector('[data-submit]') as HTMLButtonElement;
       this.stepIndicators = document.querySelectorAll('[data-step-indicator]');
+      this.stepLines = document.querySelectorAll('[data-step-line]');
       
       this.initialize();
     }
@@ -308,12 +317,41 @@ const steps = [
     initialize() {
       this.showStep(1);
       this.setupEventListeners();
+      this.setupConditionalFields();
     }
 
     setupEventListeners() {
       this.prevButton?.addEventListener('click', () => this.prevStep());
       this.nextButton?.addEventListener('click', () => this.nextStep());
       this.form?.addEventListener('submit', (e) => this.handleSubmit(e));
+    }
+
+    setupConditionalFields() {
+      // Handle situation field conditional display
+      const situationInputs = document.querySelectorAll<HTMLInputElement>('input[name="situation"]');
+      const otherField = document.querySelector('[data-field="situation_other"]');
+
+      situationInputs.forEach(input => {
+        input.addEventListener('change', (e) => {
+          const target = e.target as HTMLInputElement;
+          if (otherField) {
+            if (target.value === 'Other') {
+              otherField.classList.remove('hidden');
+              const otherInput = otherField.querySelector<HTMLInputElement>('input');
+              if (otherInput) {
+                otherInput.required = true;
+              }
+            } else {
+              otherField.classList.add('hidden');
+              const otherInput = otherField.querySelector<HTMLInputElement>('input');
+              if (otherInput) {
+                otherInput.required = false;
+                otherInput.value = '';
+              }
+            }
+          }
+        });
+      });
     }
 
     showStep(step) {
@@ -331,17 +369,33 @@ const steps = [
         currentStepElement.classList.remove('hidden');
       }
       
-      // Update step indicators
+      // Update step indicators and lines
       this.stepIndicators.forEach((indicator, index) => {
         if (index + 1 === step) {
-          indicator.classList.remove('bg-gray-200');
-          indicator.classList.add('bg-white', 'border-[#2c4863]', 'text-[#2c4863]');
+          // Current step - now blue background with white text
+          indicator.classList.remove('bg-white', 'text-accent-500', 'bg-gray-50', 'text-gray-400');
+          indicator.classList.add('bg-accent-500', 'text-white', 'border-accent-500', 'font-semibold');
         } else if (index + 1 < step) {
-          indicator.classList.remove('bg-gray-200', 'bg-white', 'text-[#2c4863]');
-          indicator.classList.add('bg-[#2c4863]', 'text-white', 'border-[#2c4863]');
+          // Completed steps - now white background with blue text and border
+          indicator.classList.remove('bg-accent-500', 'text-white', 'bg-gray-50', 'text-gray-400');
+          indicator.classList.add('bg-white', 'text-accent-500', 'border-accent-500', 'font-medium');
         } else {
-          indicator.classList.remove('bg-white', 'text-[#2c4863]', 'bg-[#2c4863]');
-          indicator.classList.add('bg-gray-200', 'text-gray-700');
+          // Upcoming steps - unchanged
+          indicator.classList.remove('bg-white', 'text-accent-500', 'bg-accent-500', 'text-white');
+          indicator.classList.add('bg-gray-50', 'text-gray-400', 'border-gray-200');
+        }
+      });
+
+      // Update connecting lines
+      this.stepLines.forEach((line, index) => {
+        if (index + 1 < step) {
+          // Completed line
+          line.classList.remove('bg-gray-200');
+          line.classList.add('bg-accent-500');
+        } else {
+          // Upcoming line
+          line.classList.remove('bg-accent-500');
+          line.classList.add('bg-gray-200');
         }
       });
       

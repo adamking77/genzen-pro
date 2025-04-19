@@ -1,13 +1,16 @@
 ---
 // Fundations
 import Text from "@/components/fundations/elements/Text.astro";
-import Button from "@/components/fundations/elements/Button.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
-// Components
-import Highlights from "@/components/services/Highlights.astro";
 // Content
-const allServices = await getCollection("services");
-import { getCollection } from "astro:content";
+const services = [
+  "3D Design",
+  "Design systems",
+  "Motion Design",
+  "Product Design",
+  "UI/UX Design",
+  "Web Development"
+];
 ---
 
 <section class="bg-white overflow-hidden relative">
@@ -29,24 +32,22 @@ import { getCollection } from "astro:content";
           We charge $20,000/month. Projects take 1-3 months.
         </Text>
       </div>
-      <div
-        class="flex flex-col flex-shrink-0 gap-8 md:flex-row md:gap-12 mt-12 md:items-center"
-      >
-        <ul role="list" class="flex flex-col gap-y-2 w-full">
+      <div class="mt-12">
+        <ul role="list" class="flex flex-col gap-y-2 w-full list-disc pl-5">
           {
-            allServices
-              .slice(0, 6)
-              .map((post) => <Highlights service={post.data.service} />)
+            services.map((service) => (
+              <li>
+                <Text
+                  tag="span"
+                  variant="textBase"
+                  class="text-accent-500"
+                >
+                  {service}
+                </Text>
+              </li>
+            ))
           }
         </ul>
-        <Button
-          href="/forms/contact"
-          variant="accent"
-          size="lg"
-          class="w-auto"
-        >
-          Contact
-        </Button>
       </div>
     </div>
   </Wrapper>
